@@ -12,7 +12,7 @@ export default function ResultPanel({ entities, actionResult }: ResultPanelProps
         <h2 className="text-lg font-semibold text-dark mb-4">
           추출 결과 & 액션
         </h2>
-        <div className="flex items-center justify-center h-[400px] text-gray-400 text-sm">
+        <div className="flex items-center justify-center h-[100%] text-gray-400 text-sm">
           Entity를 추출하면 결과가 표시됩니다
         </div>
       </div>
