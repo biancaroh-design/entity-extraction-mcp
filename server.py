@@ -231,13 +231,15 @@ async def handle_call_tool(
                     'mapUrl': nearest_location['map_url']
                 })
 
+            # 쿠폰 목록만 반환 (간결하게)
+            if not coupons:
+                return [types.TextContent(
+                    type="text",
+                    text="매칭되는 쿠폰이 없습니다"
+                )]
+
             result = {
-                'success': True,
-                'places': places,
-                'times': times,
-                'activities': activities,
-                'recommendedCoupons': coupons,
-                'message': f"{len(coupons)}개의 쿠폰을 추천합니다" if coupons else "매칭되는 쿠폰이 없습니다"
+                'coupons': coupons
             }
 
             return [types.TextContent(
@@ -302,15 +304,10 @@ async def handle_call_tool(
                     }
                 ])
 
-            result = {
-                'success': True,
-                'ticket': ticket,
-                'message': f"티켓 {ticket_id}이 발급되었습니다"
-            }
-
+            # 티켓 정보만 반환 (간결하게)
             return [types.TextContent(
                 type="text",
-                text=json.dumps(result, ensure_ascii=False, indent=2)
+                text=json.dumps(ticket, ensure_ascii=False, indent=2)
             )]
 
         else:
