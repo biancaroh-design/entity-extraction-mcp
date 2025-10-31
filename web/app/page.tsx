@@ -7,6 +7,7 @@ import ResultPanel from "@/components/ResultPanel";
 export default function Home() {
   const [selectedConversation, setSelectedConversation] = useState<string>("");
   const [conversation, setConversation] = useState<any[]>([]);
+  const [conversationData, setConversationData] = useState<any>(null);
   const [entities, setEntities] = useState<any>(null);
   const [actionResult, setActionResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,10 @@ export default function Home() {
         const couponRes = await fetch("/api/recommend", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ entities: extractedEntities }),
+          body: JSON.stringify({
+            entities: extractedEntities,
+            participants: conversationData?.participants || []
+          }),
         });
 
         if (couponRes.ok) {
@@ -65,7 +69,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-5 md:p-8">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1280px] mx-auto px-4">
         <h1 className="text-3xl font-semibold text-dark mb-8">
           Entity 추출 MCP - 대화 분석 시스템
         </h1>
@@ -76,6 +80,7 @@ export default function Home() {
             selectedConversation={selectedConversation}
             onConversationSelect={setSelectedConversation}
             onConversationLoad={setConversation}
+            onConversationDataLoad={setConversationData}
           />
 
           {/* 중앙: 추출 버튼 */}
@@ -92,7 +97,7 @@ export default function Home() {
           </div>
 
           {/* 오른쪽: 결과 패널 */}
-          <ResultPanel entities={entities} actionResult={actionResult} />
+          <ResultPanel entities={entities} actionResult={actionResult} loading={loading} />
         </div>
       </div>
     </div>

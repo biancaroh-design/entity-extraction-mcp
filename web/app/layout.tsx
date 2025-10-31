@@ -13,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="bg-white text-dark antialiased">{children}</body>
+      <body className="bg-white text-dark antialiased" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

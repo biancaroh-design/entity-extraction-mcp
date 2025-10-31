@@ -4,7 +4,7 @@ import { join } from "path";
 
 export async function POST(request: NextRequest) {
   try {
-    const { entities } = await request.json();
+    const { entities, participants = [] } = await request.json();
 
     if (entities.type !== "membership") {
       return NextResponse.json(
@@ -87,6 +87,7 @@ export async function POST(request: NextRequest) {
         times: entities.times || [],
         activities,
       },
+      participants,
       recommendedCoupons: coupons,
       message:
         coupons.length > 0

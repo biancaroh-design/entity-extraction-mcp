@@ -11,12 +11,14 @@ interface ConversationPanelProps {
   selectedConversation: string;
   onConversationSelect: (value: string) => void;
   onConversationLoad: (conversation: Message[]) => void;
+  onConversationDataLoad: (data: any) => void;
 }
 
 export default function ConversationPanel({
   selectedConversation,
   onConversationSelect,
   onConversationLoad,
+  onConversationDataLoad,
 }: ConversationPanelProps) {
   const [conversations, setConversations] = useState<any>({});
   const [conversationData, setConversationData] = useState<any>({});
@@ -58,11 +60,13 @@ export default function ConversationPanel({
       const messages = conversations[selectedConversation];
       setDisplayMessages(messages);
       onConversationLoad(messages);
+      onConversationDataLoad(conversationData[selectedConversation]);
     } else {
       setDisplayMessages([]);
       onConversationLoad([]);
+      onConversationDataLoad(null);
     }
-  }, [selectedConversation, conversations]);
+  }, [selectedConversation, conversations, conversationData]);
 
   const currentData = conversationData[selectedConversation];
   const participants = currentData?.participants || [];
@@ -81,13 +85,13 @@ export default function ConversationPanel({
   };
 
   return (
-    <div className="bg-white border-2 border-dark rounded-lg p-5 min-h-[500px]">
-      <h2 className="text-lg font-semibold text-dark mb-4">대화 내용</h2>
+    <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-[650px] flex flex-col">
+      <h2 className="text-xl font-bold text-dark mb-5">대화 내용</h2>
 
       <select
         value={selectedConversation}
         onChange={(e) => onConversationSelect(e.target.value)}
-        className="w-full p-2.5 border-2 border-dark rounded text-sm bg-white text-dark cursor-pointer mb-4"
+        className="w-full p-3 border border-gray-300 rounded-lg text-sm bg-white text-dark cursor-pointer mb-5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
       >
         <option value="">대화를 선택하세요</option>
         <option value="conversation1">멤버십 대화 1 (영화 & 아이스크림)</option>
@@ -97,15 +101,15 @@ export default function ConversationPanel({
 
       {/* 참가자 정보 표시 */}
       {participants.length > 0 && (
-        <div className="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
-          <div className="text-xs font-semibold text-blue-800 mb-2">
+        <div className="mb-5 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
+          <div className="text-xs font-bold text-blue-900 mb-3 uppercase tracking-wide">
             참가자 정보
           </div>
           <div className="flex flex-wrap gap-2">
             {participants.map((participant: any, idx: number) => (
               <div
                 key={idx}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium border ${getMembershipColor(
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border shadow-sm ${getMembershipColor(
                   participant.membership
                 )}`}
               >
@@ -116,21 +120,21 @@ export default function ConversationPanel({
         </div>
       )}
 
-      <div className="max-h-[400px] overflow-y-auto p-2.5 bg-gray-50 rounded">
+      <div className="flex-1 overflow-y-auto p-3 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-100">
         {displayMessages.length === 0 ? (
-          <div className="flex items-center justify-center h-[400px] text-gray-400 text-sm">
+          <div className="flex items-center justify-center h-full text-gray-400 text-sm">
             대화를 선택하세요
           </div>
         ) : (
           displayMessages.map((msg, idx) => (
             <div
               key={idx}
-              className="mb-3 p-3 rounded bg-white border-l-4 border-primary"
+              className="mb-3 p-4 rounded-lg bg-white border-l-4 border-primary shadow-sm"
             >
-              <div className="font-semibold text-primary text-xs mb-1">
+              <div className="font-bold text-primary text-xs mb-2 uppercase tracking-wide">
                 {msg.speaker}
               </div>
-              <div className="text-dark text-sm">{msg.text}</div>
+              <div className="text-dark text-sm leading-relaxed">{msg.text}</div>
             </div>
           ))
         )}

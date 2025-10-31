@@ -3,16 +3,50 @@
 interface ResultPanelProps {
   entities: any;
   actionResult: any;
+  loading?: boolean;
 }
 
-export default function ResultPanel({ entities, actionResult }: ResultPanelProps) {
-  if (!entities) {
+export default function ResultPanel({ entities, actionResult, loading = false }: ResultPanelProps) {
+  if (loading) {
     return (
-      <div className="bg-white border-2 border-dark rounded-lg p-5 min-h-[500px]">
-        <h2 className="text-lg font-semibold text-dark mb-4">
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-[650px] flex flex-col">
+        <h2 className="text-xl font-bold text-dark mb-5">
           추출 결과 & 액션
         </h2>
-        <div className="flex items-center justify-center h-[100%] text-gray-400 text-sm">
+        <div className="flex-1 overflow-y-auto p-3 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-100">
+          {/* Skeleton loading */}
+          <div className="mb-5 p-5 bg-white rounded-lg shadow-sm border border-gray-200 animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div className="space-y-3">
+              <div className="h-3 bg-gray-200 rounded"></div>
+              <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-3 bg-gray-200 rounded w-4/6"></div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-1/4 mb-3"></div>
+              <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+              <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+            </div>
+            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-1/4 mb-3"></div>
+              <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+              <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!entities) {
+    return (
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-[650px] flex flex-col">
+        <h2 className="text-xl font-bold text-dark mb-5">
+          추출 결과 & 액션
+        </h2>
+        <div className="flex items-center justify-center flex-1 text-gray-400 text-sm">
           Entity를 추출하면 결과가 표시됩니다
         </div>
       </div>
@@ -24,14 +58,14 @@ export default function ResultPanel({ entities, actionResult }: ResultPanelProps
   };
 
   return (
-    <div className="bg-white border-2 border-dark rounded-lg p-5 min-h-[500px]">
-      <h2 className="text-lg font-semibold text-dark mb-4">
+    <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-[650px] flex flex-col">
+      <h2 className="text-xl font-bold text-dark mb-5">
         추출 결과 & 액션
       </h2>
 
-      <div className="max-h-[400px] overflow-y-auto p-2.5 bg-gray-50 rounded">
+      <div className="flex-1 overflow-y-auto p-3 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-100">
         {/* Entity 정보 */}
-        <div className="mb-5 p-4 bg-white rounded border border-gray-200">
+        <div className="mb-5 p-5 bg-white rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-primary text-base font-semibold mb-3">
             추출된 Entity
           </h3>
@@ -105,6 +139,29 @@ export default function ResultPanel({ entities, actionResult }: ResultPanelProps
                     key={idx}
                     className="bg-white border-2 border-primary rounded-lg p-4 mb-4"
                   >
+                    {/* 페르소나 정보 */}
+                    {actionResult.participants && actionResult.participants.length > 0 && (
+                      <div className="mb-3 pb-3 border-b border-gray-200">
+                        <div className="text-xs text-gray-600 mb-2 font-medium">추천 대상</div>
+                        <div className="flex flex-wrap gap-2">
+                          {actionResult.participants.map((participant: any, pIdx: number) => (
+                            <div
+                              key={pIdx}
+                              className={`px-2 py-1 rounded text-xs font-medium ${
+                                participant.membership === 'VIP'
+                                  ? 'bg-purple-100 text-purple-700'
+                                  : participant.membership === 'GOLD'
+                                  ? 'bg-yellow-100 text-yellow-700'
+                                  : 'bg-gray-100 text-gray-700'
+                              }`}
+                            >
+                              {participant.name} ({participant.membership})
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="flex justify-between items-center mb-2">
                       <div className="text-dark text-base font-semibold">
                         {coupon.partnerName}
