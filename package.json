@@ -1,0 +1,15 @@
+{
+  "name": "entity-extraction-workspace",
+  "version": "1.0.0",
+  "description": "Entity extraction MCP server and web UI workspace",
+  "private": true,
+  "scripts": {
+    "web:dev": "cd web && npm run dev",
+    "web:build": "cd web && npm run build",
+    "web:start": "cd web && npm start",
+    "mcp:server": "python3 server.py"
+  },
+  "keywords": ["mcp", "entity-extraction", "conversation-analysis"],
+  "author": "",
+  "license": "MIT"
+}

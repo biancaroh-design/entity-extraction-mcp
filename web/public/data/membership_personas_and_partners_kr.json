@@ -1,0 +1,216 @@
+{
+    "schema_version": "1.0",
+    "personas": [
+      {
+        "id": "choi_gabel",
+        "name": "최가벨",
+        "membership_tier": "VIP",
+        "membership_years": 8,
+        "family_bundle": true,
+        "age": 30,
+        "gender": "male",
+        "job": "office_worker",
+        "apps": ["kakaotalk", "video_platforms", "shopping_apps"],
+        "spending_style": "digital_first_value",
+        "coupon_behavior": "uses_only_on_events",
+        "places_often": ["베스킨 랄라스 아이스크림", "CCW 영화관"],
+        "summary_traits": [
+          "vip_pride",
+          "focus_on_efficiency",
+          "service_quality_over_discounts"
+        ],
+        "quote": "평소에는 귀찮기도 하고, 소비를 유도하는 것 같아 쿠폰을 잘 사용 안 해요. 하지만 VIP 멤버십을 가지고 있으면 언젠가 쿠폰을 쓰는 날에는 이득을 본다고 생각합니다."
+      },
+      {
+        "id": "lee_bada",
+        "name": "이바다",
+        "membership_tier": "VIP",
+        "membership_years": 6,
+        "family_bundle": true,
+        "age": 26,
+        "gender": "female",
+        "job": "office_worker",
+        "apps": ["instagram", "kakaotalk"],
+        "interests": ["travel", "photography", "dining_out"],
+        "coupon_behavior": "movies_once_a_year_cafes_sometimes",
+        "areas_often": ["을지로", "종로", "잠실"],
+        "places_often": ["프랜차이즈_카페", "개인식당"],
+        "summary_traits": [
+          "likes_brand_experience",
+          "dislikes_complex_process",
+          "vip_pride_but_prefers_simple_use"
+        ],
+        "quote": "정책이 복잡해 잘 안 써요. 그래도 영화관은 꼭 챙겨요."
+      },
+      {
+        "id": "park_velu",
+        "name": "박벨루",
+        "membership_tier": "GOLD",
+        "membership_years": "long_term",
+        "family_bundle": true,
+        "age": 25,
+        "gender": "female",
+        "job": "office_worker",
+        "apps": ["kakaotalk"],
+        "spending_style": "practical_careful",
+        "network_use": "hotspot_when_wifi_poor",
+        "home_area": "seoul_suburbs",
+        "move_pref": ["판교", "강남", "잠실"],
+        "coupon_behavior": "mostly_convenience_store",
+        "places_often": ["L월드 놀이공원", "indie_cafes", "노래방", "공원", "회사", "집_근처_편의점"],
+        "summary_traits": [
+          "social_discomfort_using_coupons",
+          "benefit_known_but_complex",
+          "prefers_access_and_atmosphere_over_brand"
+        ],
+        "quote": "사람 많은 곳에서 꺼내기 부담돼서 편의점에서만 쓰는 편이에요."
+      },
+      {
+        "id": "kim_ruga",
+        "name": "김루가",
+        "membership_tier": "SILVER",
+        "membership_years": 1,
+        "family_bundle": false,
+        "age": 27,
+        "gender": "female",
+        "job": "graduate_student_part_time",
+        "apps": ["kakaotalk", "youtube", "instagram"],
+        "spending_style": "value_for_money_impulsive",
+        "coupon_behavior": "rarely_uses_friends_prompt",
+        "study_area": "신촌",
+        "areas_often": ["홍대", "공덕"],
+        "places_often": ["학교", "편의점", "도서관", "스타벅스"],
+        "summary_traits": [
+          "does_not_explore_benefits",
+          "prefers_simplicity",
+          "uses_only_in_specific_situations"
+        ],
+        "quote": "있어도 잘 몰라요. 친구가 말해주면 그때 써요."
+      }
+    ],
+    "membership_tiers": [
+      {
+        "tier": "VIP",
+        "min_annual_payment_krw": 600000,
+        "min_years": 5,
+        "description": "고객 등급 최상위"
+      },
+      {
+        "tier": "GOLD",
+        "min_annual_payment_krw": 480000,
+        "min_years": 2,
+        "description": "중간 등급"
+      },
+      {
+        "tier": "SILVER",
+        "min_annual_payment_krw": 0,
+        "min_years": 0,
+        "description": "모든 가입자 기본 등급"
+      }
+    ],
+    "partners": [
+      {
+        "id": "baskin_lalas",
+        "name": "베스킨 랄라스 아이스크림",
+        "category": "icecream",
+        "locations": [
+          { "id": "gangnam_exit4", "near": "강남역 4번 출구 근처", "map_url": "https://naver.me/x9BAlq3x" },
+          { "id": "shinnonhyeon_exit6", "near": "신논현역 6번 출구 근처", "map_url": "https://naver.me/FBeLQlrl" },
+          { "id": "shinchon_exit2", "near": "신촌역 2번 출구 근처", "map_url": "https://naver.me/xzxfot0k" },
+          { "id": "sadang_exit4", "near": "사당역 4번 출구 근처", "map_url": "https://naver.me/x5GoEQsb" }
+        ],
+        "benefits": [
+          { "tiers": ["VIP"], "type": "percent_discount_or_points", "value_percent": 50, "limit": { "period": "month", "count": 1 } },
+          { "tiers": ["GOLD", "SILVER"], "type": "percent_discount_or_points", "value_percent": 30, "limit": { "period": "month", "count": 1 } }
+        ]
+      },
+      {
+        "id": "cu_tomorrow",
+        "name": "씨유투모로우 편의점",
+        "category": "convenience_store",
+        "locations": [
+          { "id": "gongdeok_exit4", "near": "공덕역 4번 출구 근처", "map_url": "https://naver.me/xgNlDdoE" },
+          { "id": "bongcheon_exit2", "near": "봉천역 2번 출구 근처", "map_url": "https://naver.me/x67G0pFg" },
+          { "id": "shinchon_exit1", "near": "신촌역 1번 출구 근처", "map_url": "https://naver.me/5AgxrgEC" }
+        ],
+        "benefits": [
+          {
+            "tiers": ["VIP", "GOLD"],
+            "type": "per_1000krw_discount",
+            "discount_krw": 100,
+            "points": { "usable": true, "max_percent": 100, "min_unit_point": 10 }
+          },
+          {
+            "tiers": ["SILVER"],
+            "type": "per_1000krw_discount",
+            "discount_krw": 50,
+            "points": { "usable": true, "max_percent": 100, "min_unit_point": 10 }
+          }
+        ]
+      },
+      {
+        "id": "ccw_cinema",
+        "name": "CCW 영화관",
+        "category": "cinema",
+        "locations": [
+          { "id": "shinnonhyeon_exit6", "near": "신논현역 6번 출구 근처", "map_url": "https://naver.me/5huaSzDM" },
+          { "id": "pangyo_exit2", "near": "판교역 2번 출구 근처", "map_url": "https://naver.me/FHlGmunm" },
+          { "id": "jongno3ga_exit2", "near": "종로 3가역 2번 출구 근처", "map_url": "https://naver.me/FfeOb7Hi" }
+        ],
+        "benefits": [
+          {
+            "tiers": ["VIP", "GOLD", "SILVER"],
+            "movie": {
+              "free_tickets_per_year": 3,
+              "one_plus_one_per_year": 9,
+              "voucher_price_krw": 11000,
+              "voucher_discount_krw": 4000
+            }
+          }
+        ]
+      },
+      {
+        "id": "aljie_cafe",
+        "name": "알지예 카페",
+        "category": "cafe",
+        "locations": [
+          { "id": "mongchontoseong_exit1", "near": "몽촌토성역 1번 출구 근처", "map_url": "https://naver.me/F9N4mIwv" },
+          { "id": "gangnam_exit8", "near": "강남역 8번 출구 근처", "map_url": "https://naver.me/FG7IKEai" },
+          { "id": "pangyo_exit2", "near": "판교역 2번 출구 근처", "map_url": "https://naver.me/GrmFNB8P" }
+        ],
+        "benefits": [
+          { "tiers": ["VIP", "GOLD", "SILVER"], "type": "percent_discount", "value_percent": 10 }
+        ]
+      },
+      {
+        "id": "l_world_park",
+        "name": "L월드 놀이공원",
+        "category": "theme_park",
+        "locations": [
+          { "id": "jamsil", "near": "잠실역", "map_url": "https://naver.me/FJbWZztq" }
+        ],
+        "benefits": [
+          {
+            "tiers": ["VIP", "GOLD", "SILVER"],
+            "ticket": {
+              "member_percent": 40,
+              "companions_count": 3,
+              "companions_percent": 30,
+              "channel": "on_site"
+            }
+          }
+        ]
+      }
+    ],
+    "notes": {
+      "currency": "KRW",
+      "periods": { "month": "calendar_month", "year": "calendar_year" },
+      "low_spec_rules": [
+        "treat_missing_values_as_null",
+        "percent_values_are_integers",
+        "map_url_is_clickable",
+        "if_multiple_benefits_choose_best_for_user_tier"
+      ]
+    }
+  }
+  
