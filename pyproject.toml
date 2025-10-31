@@ -16,4 +16,7 @@ build-backend = "hatchling.build"
 packages = ["."]
 
 [project.scripts]
-entity-extraction-mcp = "server:main"
+entity-extraction-mcp = "server:run"
+
+[tool.uv]
+managed = true

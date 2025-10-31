@@ -95,26 +95,35 @@ open http://localhost:3000
 
 ### 4. Claude Desktop MCP 설정
 
-Claude Desktop 설정 파일 위치:
+#### 설정 파일 위치:
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-설정 파일에 추가:
+#### 설정 파일에 추가:
 
 ```json
 {
   "mcpServers": {
     "entity-extraction": {
-      "command": "python3",
+      "command": "/Users/YOUR_USERNAME/.local/bin/uv",
       "args": [
-        "/절대/경로/testEntityMCP/server.py"
+        "--directory",
+        "/Users/YOUR_USERNAME/Desktop/testEntityMCP",
+        "run",
+        "entity-extraction-mcp"
       ]
     }
   }
 }
 ```
 
-Claude Desktop을 재시작하면 MCP 서버가 활성화됩니다.
+**중요**:
+- `YOUR_USERNAME`을 본인의 사용자명으로 변경하세요
+- `uv` 경로 확인: `which uv` 명령어로 확인 가능
+- 프로젝트 디렉토리 경로를 본인의 실제 경로로 변경하세요
+
+#### 적용:
+Claude Desktop을 **완전히 종료**하고 다시 실행하면 MCP 서버가 활성화됩니다.
 
 ## 사용 방법
 
@@ -128,13 +137,29 @@ Claude Desktop을 재시작하면 MCP 서버가 활성화됩니다.
 
 ### Claude Desktop 사용
 
+#### 멤버십 대화 쿠폰 추천:
 1. Claude Desktop 실행
-2. 리소스 아이콘 클릭 → 대화 데이터 선택
-3. Claude에게 요청:
+2. 다음과 같이 요청:
    ```
-   conversation://1 리소스를 읽고, 대화에서 장소, 시간, 활동을 추출해줘.
-   그리고 recommend_coupons 도구를 사용해서 쿠폰을 추천해줘.
+   멤버십 대화 1을 읽고 장소를 추출한 다음, 쿠폰을 추천해줘
    ```
+
+Claude가 자동으로:
+- `conversation://1` 리소스를 읽어서 대화 분석
+- 장소, 시간, 활동 추출
+- `recommend_coupons` 도구를 호출하여 쿠폰 추천
+- 결과를 JSON 형태로 반환
+
+#### 배송 지연 티켓 발급:
+```
+배송 지연 문의 대화를 읽고, 티켓을 발급해줘
+```
+
+Claude가 자동으로:
+- `conversation://delivery` 리소스를 읽어서 대화 분석
+- 주문번호, 고객명, 상품, 상황 추출
+- `issue_ticket` 도구를 호출하여 티켓 생성
+- 티켓 ID와 우선순위 반환
 
 ## UI 특징 (미니멀 디자인)
 

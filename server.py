@@ -337,5 +337,9 @@ async def main():
         )
 
 
-if __name__ == "__main__":
+def run():
+    """Entry point for the MCP server"""
     asyncio.run(main())
+
+if __name__ == "__main__":
+    run()
